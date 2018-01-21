@@ -3,6 +3,11 @@
 #https://xkcd.com/936/
 #made by: Lachi Balabanski
 import random
+import argparse
+p = argparse.ArgumentParser()
+p.add_argument('-n','--number', required=True, help='number of words in password', type=str)
+arguments = p.parse_args()
+numWords = int(arguments.number)
 def getWordArray():
     wordArray = []
     fi = open('uncommonwords.txt','r')
@@ -23,14 +28,7 @@ def modifyPassArray(wordArray,otherArray):
     return(wordstr[:position] + specialChar + wordstr[position:])
 specialChars = ['!','@','#','$','%','^','&','*','_','-','=','+','/','?','.','~',"'",'"']
 words = getWordArray()
-numWords = input("How many words would you like in your password? reccomended: 3-4 ")
-done = False
-while done != True:
-    numWords = int(numWords)
-    x = getRandWordsArray(words,numWords)
-    finalPass = modifyPassArray(x,specialChars)
-    print(finalPass)
-    satisfied = input("Are you satisfied with this password? [y/n] ")
-    if satisfied.lower() == 'y':
-        print("Your password is: " + finalPass)
-        done = True
+numWords = int(numWords)
+x = getRandWordsArray(words,numWords)
+finalPass = modifyPassArray(x,specialChars)
+print(finalPass)
